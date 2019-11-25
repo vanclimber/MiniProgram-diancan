@@ -153,8 +153,16 @@ Page({
   },
   // 购物车内实现数量减少
   subtractItem:function(e){
-    var index = e.currentTarget.dataset.index;
+    console.log(e);
+    var id = e.currentTarget.dataset.id;
     var list=this.data.shoppingCart;
+    var index=0;
+    for(var i in list){
+      if(id===list[i].id){
+        index=i;
+        break;
+      }
+    }
     var price=list[index].price;
     list[index].number--;
     console.log(list[index].number);
@@ -171,8 +179,15 @@ Page({
   },
   // 购物车内实现数量增加
   addItem: function (e) {
-    var index = e.currentTarget.dataset.index;
+    var id = e.currentTarget.dataset.id;
     var list = this.data.shoppingCart;
+    var index = 0;
+    for (var i in list) {
+      if (id === list[i].id) {
+        index = i;
+        break;
+      }
+    }
     list[index].number++;
     this.setData({
       totalNumber: this.data.totalNumber + 1,

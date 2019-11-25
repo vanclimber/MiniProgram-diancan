@@ -29,8 +29,8 @@
 <!-- 底部购物车 -->
 <view class="footer {{totalNumber==0?'':'footer-selected'}}">
   <icon class="iconfont icon-cart bottom-cart" bindtap="controlCart"></icon>
-  <span class="goodsNumber" wx:if="{{totalNumber>0}}" >{{totalNumber}}</span>
-  <view class="total-price">
+  <span class="goodsNumber" wx:if="{{totalNumber>0}}" bindtap="controlCart">{{totalNumber}}</span>
+  <view class="total-price" bindtap="controlCart">
     ￥ {{totalPrice}}
   </view>
   <view class="pay" type="none">{{totalPrice==0?"未选购商品":"去结算"}}</view>
@@ -50,9 +50,9 @@
           <view>{{item.name}}</view>
           <view class="amount-control">
             <view class="amount-price">￥{{item.price*item.number}} </view>
-            <icon class="iconfont icon-subtract key-button" bindtap="subtractItem" data-index="{{index}}"></icon>
+            <icon class="iconfont icon-subtract key-button" bindtap="subtractItem" data-id="{{item.id}}"></icon>
             <view class="content-num">{{item.number}}</view>
-            <icon class="iconfont icon-add key-button" bindtap="addItem" data-index="{{index}}"></icon>
+            <icon class="iconfont icon-add key-button" bindtap="addItem" data-id="{{item.id}}"></icon>
           </view>
         </view>
       </scroll-view>
