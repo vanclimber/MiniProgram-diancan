@@ -131,9 +131,9 @@
   top: 0;
 }
 .cart-detail{
+  position: fixed;
   z-index: 300;
-  position: absolute;
-  bottom: 0;
+  bottom: 10vh;
   width: 100%;
   background-color:white;
 
@@ -144,6 +144,9 @@
   justify-content: space-between;
   padding: 20rpx;
   border-bottom: 4rpx solid #eee;
+}
+.cart-scroll{
+  height: 50vh;
 }
 .cart-item{
   padding: 20rpx;
@@ -159,6 +162,7 @@
 }
 .amount-price{
   padding:0 20rpx;
+  color: red;
 }
 .key-button{
   color: #ff8a06;

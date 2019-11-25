@@ -27,31 +27,35 @@
   </scroll-view>
 </view>
 <!-- 底部购物车 -->
-<view class="footer {{totalPrice==0?'':'footer-selected'}}">
+<view class="footer {{totalNumber==0?'':'footer-selected'}}">
   <icon class="iconfont icon-cart bottom-cart" bindtap="controlCart"></icon>
   <span class="goodsNumber" wx:if="{{totalNumber>0}}" >{{totalNumber}}</span>
   <view class="total-price">
-    ￥ {{totalPrice==0?"0.00":totalPrice}}
+    ￥ {{totalPrice}}
   </view>
   <view class="pay" type="none">{{totalPrice==0?"未选购商品":"去结算"}}</view>
 </view>
 <!-- 弹出栏 -->
 <view class="cart-background" wx:if="{{showCartDetail}}" bindtap="hideCart" >
-  <view class="cart-detail">
+</view>
+  <view class="cart-detail" wx:if="{{showCartDetail}}" >
     <view class="cart-title">
       <icon class="iconfont icon-cart "> 已选产品</icon>
       <icon class="iconfont icon-trashcan" bindtap="clearCart"> 清空</icon>
     </view>
+    
     <view class="cart-content">
-      <view class="cart-item" wx:for="{{shoppingCart}}" wx:key="{{item.id}}">
-        <view>{{item.name}}</view>
-        <view class="amount-control">
-          <view class="amount-price">￥{{item.price*item.number}} </view>
-          <icon class="iconfont icon-subtract key-button" bindtap="subtractItem" data-index="{{index}}"></icon>
-          <view class="content-num">{{item.number}}</view>
-          <icon class="iconfont icon-add key-button" bindtap="addItem" data-index="{{index}}"></icon>
+      <scroll-view scroll-y class="cart-scroll">
+        <view class="cart-item" wx:for="{{shoppingCart}}" wx:key="{{item.id}}">
+          <view>{{item.name}}</view>
+          <view class="amount-control">
+            <view class="amount-price">￥{{item.price*item.number}} </view>
+            <icon class="iconfont icon-subtract key-button" bindtap="subtractItem" data-index="{{index}}"></icon>
+            <view class="content-num">{{item.number}}</view>
+            <icon class="iconfont icon-add key-button" bindtap="addItem" data-index="{{index}}"></icon>
+          </view>
         </view>
-      </view>
+      </scroll-view>
     </view>
+    
   </view>
-</view>

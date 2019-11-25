@@ -8,9 +8,9 @@ Page({
     listData: [],
     shoppingCart:[],
     totalPrice:0,
+    showCartDetail: false,
     totalNumber:0,
     rpxToPx: 2,
-    showCartDetail:false
   },
 
   /**
@@ -135,6 +135,7 @@ Page({
       showCartDetail:false
     })
   },
+
   // 打开购物车
   showCart:function(){
     this.setData({
@@ -152,34 +153,33 @@ Page({
   },
   // 购物车内实现数量减少
   subtractItem:function(e){
-    console.log(e.currentTarget.dataset.index);
     var index = e.currentTarget.dataset.index;
     var list=this.data.shoppingCart;
+    var price=list[index].price;
     list[index].number--;
     console.log(list[index].number);
-    if (list[index].number==0){
-      list.splice(index,1);
+    if (list[index].number == 0) {
+      list.splice(index, 1);
     }
     this.setData({
       totalNumber:this.data.totalNumber-1,
-      totalPrice:this.data.totalPrice-list[index].price,
+      totalPrice:this.data.totalPrice-price,
       shoppingCart:list,
-      showCartDetail:true
+      showCartDetail:list.length===0?false:true,
     })
+    
   },
   // 购物车内实现数量增加
   addItem: function (e) {
-    console.log(e.currentTarget.dataset.index);
     var index = e.currentTarget.dataset.index;
     var list = this.data.shoppingCart;
     list[index].number++;
-    console.log(list[index].number);
     this.setData({
-      showCartDetail: true,
       totalNumber: this.data.totalNumber + 1,
       totalPrice: this.data.totalPrice + list[index].price,
-      shoppingCart: list,
+      shoppingCart:list,
+      showCartDetail: true,
     })
-    console.log(this.data.showCartDetail);
+    console.log(this.data.showCartDetail)
   }
 })
