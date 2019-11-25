@@ -1,0 +1,17 @@
+<!--pages/home/home.wxml-->
+<!-- 顶部轮播图 -->
+<swiper autoplay="true" interval="3000" circular indicator-dots indicator-color="#eee" indicator-active-color="#ff8a06">
+<swiper-item><image mode="widthFix" src='../../resources/image/home/swiper_1.jpg' ></image></swiper-item>
+<swiper-item><image mode="widthFix" src='../../resources/image/home/swiper_2.jpg'></image></swiper-item>
+<swiper-item><image mode="widthFix" src='../../resources/image/home/swiper_3.jpg'></image></swiper-item>
+</swiper>
+
+<!-- 点单按钮 -->
+<view >
+<button bindtap="goToProductsPage" class="to-order" hover-class="to-order-hover">自助点单</button>
+</view>
+
+<!-- 广告部分 -->
+<view class="ad">
+<image mode="widthFix" src="../../resources/image/home/home_ad1.png"></image>
+</view>

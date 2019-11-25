@@ -1,0 +1,21 @@
+/* pages/home/home.wxss */
+swiper{
+  height: 268rpx;
+  margin-bottom: 40rpx;
+}
+image{
+  width: 100%;
+}
+.to-order{
+  width: 70%;
+  color: #ff8a06;
+  border:1.5px solid #ff8a06;
+  background-color: none;
+}
+.to-order-hover {
+  border: 1.5px solid #979ca1;
+  color: #979ca1;
+}
+.ad{
+  margin-top: 40rpx;
+}

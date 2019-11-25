@@ -1,0 +1,54 @@
+/* components/AmountButton/AmountButton.wxss */
+@font-face {
+  font-family: 'iconfont';  /* project id 1504658 */
+  src: url('//at.alicdn.com/t/font_1504658_9s262xgsove.eot');
+  src: url('//at.alicdn.com/t/font_1504658_9s262xgsove.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1504658_9s262xgsove.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1504658_9s262xgsove.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1504658_9s262xgsove.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1504658_9s262xgsove.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-add:before {
+  content: "\e620";
+}
+
+.icon-star:before {
+  content: "\e615";
+}
+
+.icon-cart:before {
+  content: "\e690";
+}
+
+.icon-trashcan:before {
+  content: "\e616";
+}
+
+.icon-subtract:before {
+  content: "\e61f";
+}
+/* 好了，下面是正题 */
+.amount-button{
+  display: inline-flex;
+
+}
+.key-button{
+  color: #ff8a06;
+  font-size: 50rpx;
+}
+.content{
+  padding: 0 20rpx;
+  text-align: center;
+  font-size: 40rpx;
+  overflow: auto;
+}
+

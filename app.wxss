@@ -1,0 +1,48 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+/* 引入了iconfont */
+@font-face {
+  font-family: 'iconfont';  /* project id 1504658 */
+  src: url('//at.alicdn.com/t/font_1504658_9s262xgsove.eot');
+  src: url('//at.alicdn.com/t/font_1504658_9s262xgsove.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1504658_9s262xgsove.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1504658_9s262xgsove.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1504658_9s262xgsove.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1504658_9s262xgsove.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-add:before {
+  content: "\e620";
+}
+
+.icon-star:before {
+  content: "\e615";
+}
+
+.icon-cart:before {
+  content: "\e690";
+}
+
+.icon-trashcan:before {
+  content: "\e616";
+}
+
+.icon-subtract:before {
+  content: "\e61f";
+}

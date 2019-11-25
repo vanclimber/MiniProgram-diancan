@@ -1,0 +1,8 @@
+<!--components/AmountButton/AmountButton.wxml-->
+<view class="amount-button">
+   <icon class="iconfont icon-subtract key-button" bindtap="subtractItem"></icon>
+  <view class="content">
+  {{fakeData}}
+  </view>
+    <icon class="iconfont icon-add key-button" bindtap="addItem"></icon>
+</view>

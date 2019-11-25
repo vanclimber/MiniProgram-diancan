@@ -1,0 +1,57 @@
+<view class="main-container">
+  <!-- 左侧菜单 -->
+  <scroll-view scroll-with-animation='true' scroll-y class="left-menu" scroll-into-view="{{menuView}}">
+    <view  wx:for="{{listData}}" wx:key="this" data-index="{{index}}" id="menu{{index}}" class="menu-list {{index==menuIndex?'menu-list-selected':''}}" bindtap="selectMenu">
+        {{item.menu}}
+    </view> 
+  </scroll-view>
+  <!-- 右侧商品 -->
+  <scroll-view scroll-y class="right-content" bindscroll="scrollContent" scroll-with-animation='true' scroll-into-view="{{contentView}}" >
+    <view class="content-list" wx:for="{{listData}}" wx:key="menu" id="title{{index}}">
+    <!-- 商品类别 -->
+      <view class="item-title"  >{{item.menu}}</view>
+      <!-- 具体的商品 -->
+      <view class="item-list" wx:for="{{item.content}}" wx:key="id">
+        <view class="item-image-box">
+        <image  mode="widthFix" class="item-image" src="{{item.image}}"></image>
+        </view>
+        <view class="item-detail">
+          <view class="item-name">{{item.name}}</view>
+          <view class="item-description"> {{item.description}}</view>
+          <view class="item-sales_volume">月售：{{item.sales_volume}}</view>
+          <view class="item-price">￥ {{item.price}}</view>
+          <icon class="iconfont icon-add add-product" bindtap="addCart" data-item="{{item}}"></icon>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+<!-- 底部购物车 -->
+<view class="footer {{totalPrice==0?'':'footer-selected'}}">
+  <icon class="iconfont icon-cart bottom-cart" bindtap="controlCart"></icon>
+  <span class="goodsNumber" wx:if="{{totalNumber>0}}" >{{totalNumber}}</span>
+  <view class="total-price">
+    ￥ {{totalPrice==0?"0.00":totalPrice}}
+  </view>
+  <view class="pay" type="none">{{totalPrice==0?"未选购商品":"去结算"}}</view>
+</view>
+<!-- 弹出栏 -->
+<view class="cart-background" wx:if="{{showCartDetail}}" bindtap="hideCart" >
+  <view class="cart-detail">
+    <view class="cart-title">
+      <icon class="iconfont icon-cart "> 已选产品</icon>
+      <icon class="iconfont icon-trashcan" bindtap="clearCart"> 清空</icon>
+    </view>
+    <view class="cart-content">
+      <view class="cart-item" wx:for="{{shoppingCart}}" wx:key="{{item.id}}">
+        <view>{{item.name}}</view>
+        <view class="amount-control">
+          <view class="amount-price">￥{{item.price*item.number}} </view>
+          <icon class="iconfont icon-subtract key-button" bindtap="subtractItem" data-index="{{index}}"></icon>
+          <view class="content-num">{{item.number}}</view>
+          <icon class="iconfont icon-add key-button" bindtap="addItem" data-index="{{index}}"></icon>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
