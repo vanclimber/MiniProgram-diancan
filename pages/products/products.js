@@ -196,5 +196,16 @@ Page({
       showCartDetail: true,
     })
     console.log(this.data.showCartDetail)
+  },
+  // 确认订单
+  goToConfirm:function(){
+    if(this.data.shoppingCart!=null){
+      wx.setStorageSync('shoppingCart', this.data.shoppingCart);
+      wx.setStorageSync('totalNumber', this.data.totalNumber);
+      wx.setStorageSync('totalPrice', this.data.totalPrice);
+      wx.navigateTo({
+        url: '../confirm/confirm',
+      })
+    }
   }
 })

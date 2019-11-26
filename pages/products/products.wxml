@@ -33,12 +33,12 @@
   <view class="total-price" bindtap="controlCart">
     ￥ {{totalPrice}}
   </view>
-  <view class="pay" type="none">{{totalPrice==0?"未选购商品":"去结算"}}</view>
+  <view class="pay" type="none" bindtap="goToConfirm">{{totalPrice==0?"未选购商品":"去结算"}}</view>
 </view>
 <!-- 弹出栏 -->
-<view class="cart-background" wx:if="{{showCartDetail}}" bindtap="hideCart" >
-</view>
-  <view class="cart-detail" wx:if="{{showCartDetail}}" >
+<!-- 蒙层 -->
+<view class="cart-background" wx:if="{{showCartDetail}}" bindtap="hideCart" ></view>
+<view class="cart-detail" wx:if="{{showCartDetail}}" >
     <view class="cart-title">
       <icon class="iconfont icon-cart "> 已选产品</icon>
       <icon class="iconfont icon-trashcan" bindtap="clearCart"> 清空</icon>
@@ -58,4 +58,4 @@
       </scroll-view>
     </view>
     
-  </view>
+</view>
