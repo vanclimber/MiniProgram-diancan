@@ -1,0 +1,43 @@
+/* pages/confirm/confirm.wxss */
+.title{
+  background-color: #ededed;
+  padding: 20rpx;
+}
+.repast-style-item{
+  font-weight: bold;
+  padding: 30rpx;
+  border-bottom:3rpx solid #eee; 
+}
+.repast-style-radio{
+  position: absolute;
+  right: 30rpx;
+}
+.repast-time{
+  border: 14rpx solid #eee;
+}
+.repast-time-item{
+  padding: 30rpx;
+  border-bottom: 3rpx solid #eee;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.order-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20rpx;
+}
+.item-name{
+  flex:4
+}
+.item-number{
+  flex: 1;
+  text-align: right;
+}
+.item-price{
+  flex: 1;
+  text-align: right;
+  
+
+}

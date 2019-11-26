@@ -1,0 +1,29 @@
+
+<!--就餐方式 -->
+<view class="repast-style">
+  <view class="title">请选择就餐方式</view>
+  <radio-group class="radio-group">
+    <view class="repast-style-item">堂食
+      <radio class="radio repast-style-radio" checked="true" color="#ff8a06"></radio>
+    </view>
+    <view class="repast-style-item">外带
+      <radio class="radio repast-style-radio" color="#ff8a06"></radio>
+    </view>
+  </radio-group>
+</view>
+<!-- 就餐时间 -->
+<view class="repast-time">
+  <view class="title">请选择就餐时间</view>
+  <radio-group class="radio-group repast-time-item">
+    <radio class="radio" color="#ff8a06" checked="true">立即用餐</radio>
+    <radio class="radio" color="#ff8a06">预约用餐</radio>
+  </radio-group>
+</view>
+<!-- 订单详情 -->
+<view class="order-detail">
+  <view class="order-item" wx:for="{{goodslist}}" wx:key="id">
+    <view class="item-name">{{item.name}}</view>
+    <view class="item-number">x{{item.number}}</view>
+    <view class="item-price">￥{{item.number*item.price}}</view>
+  </view>
+</view>
