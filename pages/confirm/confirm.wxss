@@ -1,23 +1,26 @@
 /* pages/confirm/confirm.wxss */
+.main-container{
+  background-color: #d6d6d6;
+  padding: 0 16rpx 16rpx 16rpx;
+  height: 90vh;
+  overflow: auto;
+}
 .title{
-  background-color: #ededed;
   padding: 20rpx;
+}
+.background-style{
+  border-radius: 10rpx;
+  background-color: #fff;
 }
 .repast-style-item{
   font-weight: bold;
   padding: 30rpx;
-  border-bottom:3rpx solid #eee; 
-}
-.repast-style-radio{
-  position: absolute;
-  right: 30rpx;
-}
-.repast-time{
-  border: 14rpx solid #eee;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .repast-time-item{
   padding: 30rpx;
-  border-bottom: 3rpx solid #eee;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -38,6 +41,46 @@
 .item-price{
   flex: 1;
   text-align: right;
-  
-
 }
+.total-price{
+  border-top: 4rpx solid #eee;
+  font-weight: bold;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.footer-selected{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 9vh;
+  padding: 0 30rpx;
+  background-color: #fdad51;
+  color: white;
+  align-items: center;
+  font-size: 3vh;
+}
+.bottom-icon{                                                                                                                                                                                
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.bottom-icon icon{
+  font-size: 6vh;
+}
+.goodsNumber{
+  font-size: 30rpx;
+  position: relative;
+  right: 2vh;
+  bottom:2vh;
+  background-color: red;
+  color: white;
+  padding: 0 8rpx;
+  border-radius: 50%;
+}
+

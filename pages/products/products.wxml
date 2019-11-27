@@ -28,12 +28,12 @@
 </view>
 <!-- 底部购物车 -->
 <view class="footer {{totalNumber==0?'':'footer-selected'}}">
-  <icon class="iconfont icon-cart bottom-cart" bindtap="controlCart"></icon>
-  <span class="goodsNumber" wx:if="{{totalNumber>0}}" bindtap="controlCart">{{totalNumber}}</span>
-  <view class="total-price" bindtap="controlCart">
-    ￥ {{totalPrice}}
+  <view class="bottom-icon" bindtap="controlCart">
+    <icon class="iconfont icon-cart" ></icon>
+    <span class="goodsNumber" wx:if="{{totalNumber>0}}">{{totalNumber}}</span>
+    <view class="bottom-price" >￥ {{totalPrice}}</view>
   </view>
-  <view class="pay" type="none" bindtap="goToConfirm">{{totalPrice==0?"未选购商品":"去结算"}}</view>
+  <view bindtap="goToConfirm">{{totalPrice==0?"未选购商品":"去结算"}}</view>
 </view>
 <!-- 弹出栏 -->
 <!-- 蒙层 -->

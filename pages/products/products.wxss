@@ -4,6 +4,8 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  height: 90vh;
+  overflow: auto;
 }
 
 .left-menu{
@@ -93,10 +95,13 @@
 .footer{
   position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: row;
-  height: 10vh;
-  width: 100%;
+  justify-content: space-between;
+  height: 9vh;
+  padding: 0 30rpx;
   background-color: #a9a9a9;
   color: white;
   align-items: center;
@@ -105,22 +110,23 @@
 .footer-selected{
   background-color: #fdad51;
 }
-.bottom-cart{
-  font-size: 7vh;
-  padding: 0 2vh;
+.bottom-icon{                                                                                                                                                                                
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.bottom-icon icon{
+  font-size: 6vh;
 }
 .goodsNumber{
-  position: absolute;
-  left:7vh;
-  top:1vh;
+  font-size: 30rpx;
+  position: relative;
+  right: 2vh;
+  bottom:2vh;
   background-color: red;
   color: white;
-  padding: 0 14rpx;
+  padding: 0 8rpx;
   border-radius: 50%;
-}
-.pay{
-  position: absolute;
-  right:2vh;
 }
 .cart-background{
   position: fixed;
