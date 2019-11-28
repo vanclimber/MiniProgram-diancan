@@ -1,6 +1,6 @@
 /* pages/confirm/confirm.wxss */
 .main-container{
-  background-color: #d6d6d6;
+  background-color: #e2e2e2;
   padding: 0 16rpx 16rpx 16rpx;
   height: 90vh;
   overflow: auto;
@@ -84,3 +84,6 @@
   border-radius: 50%;
 }
 
+.remark{
+  margin-top: 8rpx;
+}

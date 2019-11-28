@@ -1,7 +1,7 @@
 <view class="main-container">
   <!--就餐方式 -->
+  <view class="title">请选择就餐方式</view>
   <view class="repast-style">
-    <view class="title">请选择就餐方式</view>
     <radio-group class="radio-group background-style">
       <view class="repast-style-item">
         <view>堂食</view>
@@ -14,15 +14,15 @@
     </radio-group>
   </view>
   <!-- 就餐时间 -->
+  <view class="title">请选择就餐时间</view>
   <view class="repast-time">
-    <view class="title">请选择就餐时间</view>
     <radio-group class="radio-group repast-time-item background-style">
       <radio class="radio" color="#ff8a06" checked="true">立即用餐</radio>
       <radio class="radio" color="#ff8a06">预约用餐</radio>
     </radio-group>
   </view>
   <!-- 订单详情 -->
-  <view class="title">明细</view>
+  <view class="title">详情</view>
   <view class="background-style">
     <view class="order-content">
       <view class="order-item" wx:for="{{goodslist}}" wx:key="id">
@@ -32,11 +32,19 @@
       </view>
     </view>
     <view class="total-price">
-          <view>合计</view>
-          <view>￥{{totalPrice}}</view>
+      <view>合计</view>
+      <view>￥{{totalPrice}}</view>
+    </view>
+  </view>
+  <!-- 备注 -->
+  <view class="title">备注</view>
+  <view class="remark">
+    <view class="background-style">
+      <textarea placeholder="请输入您的备注"></textarea>
     </view>
   </view>
 </view>
+
 <!-- 底部购物车 -->
 <view class="footer-selected">
   <view class="bottom-icon">
