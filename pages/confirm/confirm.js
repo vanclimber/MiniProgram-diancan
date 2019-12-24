@@ -7,7 +7,6 @@ Page({
   data: {
     repastStyle:"堂食",
     repastTime:"立即用餐",
-    timeIndex:0,
     timeList:[],
     finalTime:0,
     newOrder:{},
@@ -40,6 +39,11 @@ Page({
   },
   //选择就餐时间
   choiceRepastTime:function(e){
+    if (e.detail.value ==="立即用餐"){
+      this.setData({
+        finalTime:0
+      })
+    }
     this.setData({
       repastTime: e.detail.value
     })
