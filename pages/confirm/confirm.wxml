@@ -2,30 +2,36 @@
   <!--就餐方式 -->
   <view class="title">请选择就餐方式</view>
   <view class="repast-style">
-    <radio-group class="radio-group background-style">
+    <radio-group class="radio-group background-style" bindchange="choiceRepastStyle">
       <view class="repast-style-item">
         <view>堂食</view>
-        <radio class="radio repast-style-radio" checked="true" color="#ff8a06"></radio>
+        <radio class="radio repast-style-radio" checked="true" color="#ff8a06" value="堂食"></radio>
       </view>
       <view class="repast-style-item">
         <view>外带</view>
-        <radio class="radio repast-style-radio" color="#ff8a06"></radio>
+        <radio class="radio repast-style-radio" color="#ff8a06" value="外带"></radio>
       </view>
     </radio-group>
   </view>
   <!-- 就餐时间 -->
   <view class="title">请选择就餐时间</view>
   <view class="repast-time">
-    <radio-group class="radio-group repast-time-item background-style">
-      <radio class="radio" color="#ff8a06" checked="true">立即用餐</radio>
-      <radio class="radio" color="#ff8a06">预约用餐</radio>
+    <radio-group class="radio-group repast-time-item background-style" bindchange="choiceRepastTime">
+      <radio class="radio" color="#ff8a06" checked="true" value="立即用餐">立即用餐</radio>
+      <picker  mode="selector" range="{{timeList}}" value="{{finalTime}}" bindchange="selectReservationTime">
+        <radio class="radio" color="#ff8a06" value="预约用餐" >    
+        <text>{{finalTime===0?"预约用餐":finalTime}}</text>
+        </radio>
+      </picker>
+
     </radio-group>
   </view>
+  
   <!-- 订单详情 -->
   <view class="title">详情</view>
   <view class="background-style">
     <view class="order-content">
-      <view class="order-item" wx:for="{{goodslist}}" wx:key="id">
+      <view class="order-item" wx:for="{{newOrder.goodsList}}" wx:key="id">
         <view class="item-name">{{item.name}}</view>
         <view class="item-number">x{{item.number}}</view>
         <view class="item-price">￥{{item.number*item.price}}</view>
@@ -33,14 +39,14 @@
     </view>
     <view class="total-price">
       <view>合计</view>
-      <view>￥{{totalPrice}}</view>
+      <view>￥{{newOrder.totalPrice}}</view>
     </view>
   </view>
   <!-- 备注 -->
   <view class="title">备注</view>
   <view class="remark">
     <view class="background-style">
-      <textarea placeholder="请输入您的备注"></textarea>
+      <textarea placeholder="请输入您的备注,如口味，注意事项" bindinput="showRemark" auto-height="true"></textarea>
     </view>
   </view>
 </view>
@@ -49,8 +55,8 @@
 <view class="footer-selected">
   <view class="bottom-icon">
     <icon class="iconfont icon-cart" ></icon>
-    <span class="goodsNumber">{{totalNumber}}</span>
-    <view class="bottom-price" >￥ {{totalPrice}}</view>
+    <span class="goodsNumber">{{newOrder.totalNumber}}</span>
+    <view class="bottom-price" >￥ {{newOrder.totalPrice}}</view>
   </view>
-  <view>去支付</view>
+  <view bindtap="toPay">去支付</view>
 </view>

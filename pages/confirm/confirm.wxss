@@ -50,6 +50,11 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+textarea{
+  padding: 20rpx;
+  width: auto;
+}
 .footer-selected{
   position: fixed;
   bottom: 0;

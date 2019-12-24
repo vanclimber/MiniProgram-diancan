@@ -153,7 +153,6 @@ Page({
   },
   // 购物车内实现数量减少
   subtractItem:function(e){
-    console.log(e);
     var id = e.currentTarget.dataset.id;
     var list=this.data.shoppingCart;
     var index=0;
@@ -165,7 +164,6 @@ Page({
     }
     var price=list[index].price;
     list[index].number--;
-    console.log(list[index].number);
     if (list[index].number == 0) {
       list.splice(index, 1);
     }
@@ -195,7 +193,6 @@ Page({
       shoppingCart:list,
       showCartDetail: true,
     })
-    console.log(this.data.showCartDetail)
   },
   // 确认订单
   goToConfirm:function(){
