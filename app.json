@@ -7,7 +7,8 @@
     "pages/orders/orders",
     "pages/my/my",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/orderInfo/orderInfo"
   ],
   "window": {
     "backgroundTextStyle":"dark",

@@ -1,2 +1,21 @@
 <!--pages/orders/orders.wxml-->
-<text>pages/orders/orders.wxml</text>
+<view class="orderList">
+  <view class="orderItem" wx:for="{{storesList}}" wx:key="id" data-id="{{item.id}}" bindtap="goToOrderInfo">
+    <view class="orderTitle">
+      <view class="storeName">建设路店 ></view>
+      <view class="orderStatus">{{item.status}}</view>
+    </view>
+    <view class="orderDetails">
+      <view class="imageContainer">
+        <image src="../../resources/image/orders/store.png" mode="widthFix"></image>
+      </view>
+      <view class="orderInfo">
+        <view class="orderTime">下单时间：{{item.time}}</view>
+        <view>{{item.style}}</view>
+        <view>备注：{{item.description}}</view>
+        <view>总价：￥{{item.price}}</view>
+        <view class="evaluate" catchtap="goToEvaluate"><span>评价</span></view>
+      </view>
+    </view>
+  </view>
+</view>

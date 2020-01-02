@@ -64,6 +64,14 @@
 					"id": -1,
 					"name": "pages/confirm/confirm",
 					"pathName": "pages/confirm/confirm",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/orders/orders",
+					"pathName": "pages/orders/orders",
+					"query": "",
 					"scene": null
 				}
 			]

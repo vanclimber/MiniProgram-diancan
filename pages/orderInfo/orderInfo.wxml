@@ -1,0 +1,45 @@
+<!--pages/orderInfo/orderInfo.wxml-->
+<view class="background">
+  <view class="goodsBox">
+    <view class="title">{{storeName}} ></view>
+    <view class="item" wx:for="{{goodsList}}" wx:key="id">
+      <view class="imageBox">
+      <image src="../../resources/image/orders/store.png" mode="widthFix"></image>
+      </view>
+      <view class="goodsInfo">
+        <span>{{item.name}}</span>
+        <span>{{item.taste}}</span>
+        <span >x{{item.num}}</span>
+        <span class="itemPrice">￥{{item.num*item.price}}</span>
+      </view>
+    </view>
+    <view class="price">
+      <span >合计：￥{{totalPrice}}</span>
+    </view>
+  </view>
+  <view class="goodsBox">
+    <view class="title">
+      <span>订单信息</span>
+    </view>
+    <view class="orderList">
+      <span>就餐方式</span>
+      <span>{{repastStyle}}</span>
+    </view>
+    <view class="orderList">
+      <span>就餐时间</span>
+      <span>{{repastTime}}</span>
+    </view>
+    <view class="orderList">
+      <span>订单号码</span>
+      <span>{{orderId}}</span>
+    </view>
+    <view class="orderList">
+      <span>下单时间</span>
+      <span>{{orderTime}}</span>
+    </view>
+    <view class="orderList">
+      <span>支付方式</span>
+      <span>{{payStyle}}</span>
+    </view>
+  </view>
+</view>

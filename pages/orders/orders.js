@@ -5,16 +5,42 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 后端接口还没开发，所以伪数据进行实验
+    storesList:[]
 
   },
+
+  
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
+    let self=this;
+    wx.request({
+      url: 'http://rap2api.taobao.org/app/mock/237196/orderlist',
+      success(res){
+        self.setData({
+          storesList:res.data.allorders
+        })
+
+      }
+    })
+
   },
 
+  goToOrderInfo:function(e){
+    let id=e.currentTarget.dataset.id;
+    wx.showLoading({
+      title: '加载中',
+      mask:true,
+    });
+    wx.navigateTo({
+      url: '../orderInfo/orderInfo?id='+id,
+    })
+    wx.hideLoading();
+
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

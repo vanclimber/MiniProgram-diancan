@@ -104,6 +104,7 @@ Page({
       dataType: 'json',
       responseType: 'text',
       success: function(res) {
+        console.log(res);
         wx.showToast({
           title:'支付成功',
           icon:'success',
@@ -115,6 +116,7 @@ Page({
         console.log(res);
       },
       fail: function(res) {
+        console.log
         wx.showToast({
           title:'支付失败',
           icon:'fail',

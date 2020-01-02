@@ -1,0 +1,68 @@
+/* pages/orderInfo/orderInfo.wxss */
+.background{
+  background-color: #eee;
+  height: 100vh;
+  overflow: scroll;
+  padding:20rpx;
+}
+.goodsBox{
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding:20rpx;
+  margin-bottom: 10rpx;
+}
+.title{
+  padding-bottom: 20rpx;
+  border-bottom: rgb(218, 215, 215) 1px solid;
+  margin-bottom: 10rpx;
+}
+.item{
+  margin-bottom: 15rpx;
+
+}
+.imageBox{
+  display: inline-block;
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.imageBox image{
+  width: 100%;
+  border-radius: 20rpx;
+}
+.goodsInfo{
+  display: inline-block;
+  font-size: small;
+  padding-left: 10rpx;
+  height: 100rpx;
+  vertical-align: top;
+  width: calc(100% - 110rpx);
+  position: relative;
+}
+.goodsInfo > span{
+  display: block;
+}
+.goodsInfo span:nth-child(2),.goodsInfo span:nth-child(3){
+  color: gray;
+}
+.goodsInfo span:nth-child(4){
+  position: absolute;
+  right: 0rpx;
+  top:50%;
+}
+.price{
+  border-top: rgb(218, 215, 215) 1px solid;
+  padding-top: 10rpx;
+  width: 100%;
+  text-align: right;
+  color: #ff8a06;
+}
+.orderList{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+.orderList span:first-child{
+  color: gray;
+}
+

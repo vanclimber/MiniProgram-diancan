@@ -1,1 +1,74 @@
 /* pages/orders/orders.wxss */
+.orderList{
+  padding: 20rpx 20rpx 20rpx 20rpx;
+  background-color: #ededed;
+  height: 100vh;
+  overflow: scroll;
+  /* background-color: green; */
+}
+.orderItem{
+  margin-bottom: 20rpx;
+  background: #fff;
+  padding:20rpx;
+  border-radius: 20rpx;
+}
+
+.orderTitle{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10rpx;
+  border-bottom: gray 1px solid;
+}
+.storeName{
+  font-weight: bold;
+}
+
+.imageContainer{
+  padding-top: 10rpx;
+  display: inline-block;
+  height: 200rpx;
+  width: 200rpx;
+}
+.imageContainer image{
+  width:100%;
+  height: 100%;
+  overflow: hidden;
+  /* background-color: green; */
+  border-radius: 20rpx;
+
+}
+.orderInfo{
+  display: inline-block;
+  padding:10rpx;
+  width: calc(100% - 220rpx);
+  vertical-align: top;
+  height: 200rpx;
+  position: relative;
+}
+.orderInfo > view{
+  margin-bottom: 10rpx;
+}
+.orderInfo view:nth-child(2),.orderInfo view:nth-child(3){
+  color: gray;
+  font-size: small;
+}
+.orderTime{
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+
+}
+.evaluate{
+  position: absolute;
+  right: 10rpx;
+  bottom: 10rpx;
+  padding:10rpx 30rpx;
+  text-align: center;
+  
+  border-radius: 20rpx;
+  border: #eee 2px solid;
+
+
+}
