@@ -68,29 +68,33 @@
 }
 .item-name{
   overflow: hidden;
+  text-overflow: ellipsis;
   color: black;
 }
-.item-description{
-  font-size: 26rpx;
-  color: #9c9c9c;
-  overflow: hidden;
+.collect{
+  position: absolute;
+  top:0rpx;
+  right:10rpx;
+  color: #ff8a06;
+  font-size: 40rpx;
 }
-.item-sales_volume{
-  font-size: 26rpx;
-  color: #9c9c9c;
 
-}
 .item-price{
   color: #ff4006;
   position: absolute;
   bottom: 30rpx;
 }
-.add-product{
+.counts-control{
   position: absolute;
-  bottom: 30rpx;
-  right: 20rpx;
-  color: #ff8a06;
+  bottom: 20rpx;
+  right: 5rpx;
   font-size: 40rpx;
+}
+.count-icon{
+  padding: 0rpx 10rpx;
+  font-size: 40rpx;
+  color: #ff8a06;
+
 }
 .footer{
   position: fixed;
@@ -170,12 +174,9 @@
   padding:0 20rpx;
   color: red;
 }
-.key-button{
-  color: #ff8a06;
-  font-size: 50rpx;
-}
+
 .content-num{
-  padding: 0 20rpx;
+  padding: 0 10rpx;
   text-align: center;
   font-size: 40rpx;
 }

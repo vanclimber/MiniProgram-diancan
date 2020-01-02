@@ -5,27 +5,24 @@ Page({
    * 页面的初始数据
    */
   data: {
+    goodsList: {},
     repastStyle:"堂食",
     repastTime:"立即用餐",
     timeList:[],
-    finalTime:0,
-    newOrder:{},
+    description:"",
+    repastNow:true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let order = {
+    this.createTimeList();
+    this.setData({
       goodsList: wx.getStorageSync('shoppingCart'),
       totalPrice: wx.getStorageSync('totalPrice'),
       totalNumber: wx.getStorageSync('totalNumber'),
       repastStyle: this.data.repastStyle,
-    }
-    this.createTimeList();
-    console.log(order);
-    this.setData({
-      newOrder:order
     })
 
   },
@@ -41,19 +38,32 @@ Page({
   choiceRepastTime:function(e){
     if (e.detail.value ==="立即用餐"){
       this.setData({
-        finalTime:0
+        finalTime:0,
+        repastTime: e.detail.value
       })
     }
-    this.setData({
-      repastTime: e.detail.value
-    })
+    else{
+      this.setData({
+        repastTime: e.detail.value
+      })
+    }   
   },
   // 预约用餐时间
   selectReservationTime(e){
     this.setData({
-      finalTime: this.data.timeList[e.detail.value]
+      repastTime: this.data.timeList[e.detail.value]
     })
 
+  },
+  // 取消预约就餐时间
+  cancelReservationTime:function(e){
+    console.log(e);
+    if(this.data.repastTime==="预约用餐"){
+      this.setData({
+        repastNow: true,
+        repastTime: "立即用餐"
+      })
+    }
   },
   // 生成就餐时间列表
   createTimeList:function(e){
@@ -70,31 +80,51 @@ Page({
     this.setData({
       timeList:timeList,
     })
-    console.log(date);
   },
   // 更新备注
-  // showRemark:function(e){
-  //   console.log(e.detail.value);
-  // },
-  toPay:function(e){
-    console.log(this.data.newOrder)
-    wx:wx.request({
-      url: 'http://rap2api.taobao.org/app/mock/237196/neworder',
-      data: {
-        order: this.data.newOrder
+  showRemark:function(e){
+    this.setData({
+      description:e.detail.value
+    })
 
-        },
+  },
+  toPay:function(e){
+    let order={};
+    order.goodsList=this.data.goodsList;
+    order.description=this.data.description;
+    order.style=this.data.repastStyle;
+    order.time=this.data.repastTime;
+    wx.request({
+      url: 'http://rap2api.taobao.org/app/mock/237196/neworder',
+      data: order,
       header: {
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "application/json"
       },
       method: 'POST',
       dataType: 'json',
       responseType: 'text',
       success: function(res) {
+        wx.showToast({
+          title:'支付成功',
+          icon:'success',
+          duration: 2000
+        })
+        wx.reLaunch({
+          url: '../orders/orders?id='+"res.data.id"
+        })
         console.log(res);
       },
-      fail: function(res) {},
-      complete: function(res) {},
+      fail: function(res) {
+        wx.showToast({
+          title:'支付失败',
+          icon:'fail',
+          duration: 2000
+        })
+      },
+      complete: function(res) {
+        
+
+      },
     })
 
   },

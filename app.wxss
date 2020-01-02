@@ -11,12 +11,12 @@
 /* 引入了iconfont */
 @font-face {
   font-family: 'iconfont';  /* project id 1504658 */
-  src: url('//at.alicdn.com/t/font_1504658_9s262xgsove.eot');
-  src: url('//at.alicdn.com/t/font_1504658_9s262xgsove.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1504658_9s262xgsove.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1504658_9s262xgsove.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1504658_9s262xgsove.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1504658_9s262xgsove.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1504658_44vddg9in35.eot');
+  src: url('//at.alicdn.com/t/font_1504658_44vddg9in35.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1504658_44vddg9in35.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1504658_44vddg9in35.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1504658_44vddg9in35.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1504658_44vddg9in35.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -31,7 +31,7 @@
   content: "\e620";
 }
 
-.icon-star:before {
+.icon-starSelected:before {
   content: "\e615";
 }
 
@@ -45,4 +45,7 @@
 
 .icon-subtract:before {
   content: "\e61f";
+}
+.icon-star:before {
+  content: "\e68a";
 }

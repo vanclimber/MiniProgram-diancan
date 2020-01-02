@@ -20,7 +20,7 @@
       <radio class="radio" color="#ff8a06" checked="{{repastNow}}" value="立即用餐">立即用餐</radio>
       <picker  mode="selector" range="{{timeList}}" value="{{finalTime}}" bindchange="selectReservationTime" bindcancel="cancelReservationTime">
         <radio class="radio" color="#ff8a06" value="预约用餐" >    
-        <text>{{finalTime===0?"预约用餐":finalTime}}</text>
+        <text>{{repastTime==="立即用餐"?"预约用餐":repastTime}}</text>
         </radio>
       </picker>
 
@@ -31,7 +31,7 @@
   <view class="title">详情</view>
   <view class="background-style">
     <view class="order-content">
-      <view class="order-item" wx:for="{{newOrder.goodsList}}" wx:key="id">
+      <view class="order-item" wx:for="{{goodsList}}" wx:key="id">
         <view class="item-name">{{item.name}}</view>
         <view class="item-number">x{{item.number}}</view>
         <view class="item-price">￥{{item.number*item.price}}</view>
@@ -39,7 +39,7 @@
     </view>
     <view class="total-price">
       <view>合计</view>
-      <view>￥{{newOrder.totalPrice}}</view>
+      <view>￥{{totalPrice}}</view>
     </view>
   </view>
   <!-- 备注 -->
@@ -55,8 +55,8 @@
 <view class="footer-selected">
   <view class="bottom-icon">
     <icon class="iconfont icon-cart" ></icon>
-    <span class="goodsNumber">{{newOrder.totalNumber}}</span>
-    <view class="bottom-price" >￥ {{newOrder.totalPrice}}</view>
+    <span class="goodsNumber">{{totalNumber}}</span>
+    <view class="bottom-price" >￥ {{totalPrice}}</view>
   </view>
   <view bindtap="toPay">去支付</view>
 </view>
