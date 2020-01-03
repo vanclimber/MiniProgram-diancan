@@ -5,12 +5,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    goodsList: {},      //存放商品目录以及商品数量
+    goodsList: [],      //存放商品列表
+    typeList:[],
     shoppingCart:[],
     totalPrice:0,
     showCartDetail: false,
     totalNumber:0,
     rpxToPx: 2,
+    menuIndex:0,
   },
 
   /**
@@ -24,22 +26,25 @@ Page({
     // 在easy-mock中伪造数据
     // eaay-mock老是炸，所以我在rap2伪造数据。
     wx.request({
-      url: 'http://rap2api.taobao.org/app/mock/237196/productstest',
+      url: 'http://rap2api.taobao.org/app/mock/237196/products',
       method: 'GET',
-      data: {},
       success: function (res) {
         wx.hideLoading();
-        let listData={};
+        let goodsList=[];
+        let typeList=[];
         // 将收到的object类型数据的整理成数组
-        for(let index in res.data){
-            listData[index]=res.data[index];
-          for(let i in listData[index]){
-            listData[index][i].number=0;
-            listData[index][i].isStar=false;
+        for(let i in res.data){
+          typeList.push(i);
+          for(let j in res.data[i]){
+            goodsList.push(res.data[i][j]);
+            goodsList[goodsList.length-1].number=0;
+            goodsList[goodsList.length-1].isStar=false;
+            goodsList[goodsList.length-1].tasteSelected=goodsList[goodsList.length-1].tastes[0];
           }
         }
         self.setData({
-          goodsList: listData,
+          goodsList: goodsList,
+          typeList:typeList,
         })
         },
 
@@ -61,31 +66,50 @@ Page({
           rpxToPx: res.screenWidth / 750
         })
       }
-    })
+    });
 
   },
   // 点击左侧联动右侧
   selectMenu:function(event){
-    let index = event.currentTarget.id;
-    index=index.slice(4);
+    let typeName = this.data.typeList[event.currentTarget.id.slice(4)];
+    let goodsList=this.data.goodsList;
+    let id;
+    for(let i in goodsList){
+      if(typeName==goodsList[i].foodType){
+        id=goodsList[i].id;
+        break;
+      }
+    }
     this.setData({
-      menuName: event.currentTarget.dataset.name,
-      contentView: 'title' + index,
+      menuIndex: event.currentTarget.dataset.index,
+      contentView: 'title' + id,
     })
   },
   // 滑动右侧联动左侧
   scrollContent:function(e){
-    var rpxToPx = this.data.rpxToPx;
-    var scrollHeight = e.detail.scrollTop;  
-    var goodsData = this.data.goodsList;
-    var sumHeight = 0;	
+    let rpxToPx = this.data.rpxToPx;
+    let scrollHeight = e.detail.scrollTop;  
+    let goodsData = this.data.goodsList;
+    let sumHeight = 0;	
     for (let index in goodsData) { 
-      // 35为title高度。250为每个item高度    
-      sumHeight += 40*rpxToPx + goodsData[index].length * 250*rpxToPx;
+      // 40为title高度。250为每个item高度    
+      sumHeight +=  290*rpxToPx;
+      if(index>0&&goodsData[index-1].foodType===goodsData[index].foodType){
+        sumHeight-=40*rpxToPx;
+      }
       if (scrollHeight <= sumHeight) {
+        let foodType=goodsData[index].foodType;
+        let typeList=this.data.typeList;
+        let num=0;
+        for(let i in typeList){
+          if(foodType==typeList[i]){
+            num=i;
+            break;
+          }
+        }
         this.setData({
-          menuView: 'menu'+goodsData[index][0].id,
-          menuName: index,
+          menuView: 'menu'+num,
+          menuIndex: num,
         })
         break;   
       }
@@ -113,55 +137,61 @@ Page({
 
   },
 
-
-  // 添加商品
-  addGoods:function(e){
+  // 更改商品数量
+  controlGoodsNum:function(e){
     let item=e.currentTarget.dataset.item;
-    let cartList = [];
-    let goodsData=this.data.goodsList;
-    for(let i in goodsData){
-      for(let j in goodsData[i]){
-        if(goodsData[i][j].id===item.id){
-          goodsData[i][j].number++;
+    let num=e.currentTarget.dataset.num;
+    let shoppingCartCopy=[];
+    let goodsListCopy=this.data.goodsList;
+    let self=this;
+    if(item.number===0&&num===1){
+      wx.showActionSheet({
+        itemList: item.tastes,
+        success:function(res){
+          console.log("成功了");
+          for(let i in goodsListCopy){
+            if(goodsListCopy[i].id===item.id){
+              goodsListCopy[i].tasteSelected=goodsListCopy[i].tastes[res.tapIndex];
+              goodsListCopy[i].number=1;
+            }
+            if(goodsListCopy[i].number!=0){
+              shoppingCartCopy.push(goodsListCopy[i]);
+            }
+          }
+          self.setData({
+            goodsList:goodsListCopy,
+            shoppingCart:shoppingCartCopy,
+            totalPrice:self.data.totalPrice+num*item.price,
+            totalNumber:self.data.totalNumber+num
+          })
+        },
+        fail:function(){
+          return;
+        },
+      })     
+    }
+    else{
+      for(let i in goodsListCopy){
+        if(goodsListCopy[i].id===item.id){
+          goodsListCopy[i].number+=num;
         }
-        if(goodsData[i][j].number!==0){
-          cartList.push(goodsData[i][j]);
+        if(goodsListCopy[i].number!=0){
+          shoppingCartCopy.push(goodsListCopy[i]);
         }
       }
+      this.setData({
+        goodsList:goodsListCopy,
+        shoppingCart:shoppingCartCopy,
+        totalPrice:this.data.totalPrice+num*item.price,
+        totalNumber:this.data.totalNumber+num
+      })     
     }
-    this.setData({
-      goodsList: goodsData,
-      shoppingCart:cartList,
-      totalPrice:this.data.totalPrice+item.price,
-      totalNumber:this.data.totalNumber+1
-    })
+
+
 
 
   },
 
-  // 减少商品
-  subtractGoods:function(e){
-    let item=e.currentTarget.dataset.item;
-    let cartList = [];
-    let goodsData=this.data.goodsList;
-    for(let i in goodsData){
-      for(let j in goodsData[i]){
-        if(goodsData[i][j].id===item.id){
-          goodsData[i][j].number--;
-        }
-        if(goodsData[i][j].number!==0){
-          cartList.push(goodsData[i][j]);
-        }
-      }
-    }
-    this.setData({
-      goodsList: goodsData,
-      shoppingCart:cartList,
-      totalPrice:this.data.totalPrice-item.price,
-      totalNumber:this.data.totalNumber-1
-    })
-
-  },
   // 开关购物车详情页面
   controlCart:function(){
     if(this.data.totalNumber!=0){
@@ -177,7 +207,6 @@ Page({
       showCartDetail:false
     })
   },
-
   // 打开购物车
   showCart:function(){
     this.setData({
@@ -201,65 +230,24 @@ Page({
       showCartDetail:false
     })
   },
-  // 购物车内实现数量减少
-  subtractInCart:function(e){
+  // 购物车内实现数量改变
+  goodsNumInCart: function (e) {
     let item = e.currentTarget.dataset.item;
+    let num=e.currentTarget.dataset.num;
     let list=this.data.shoppingCart;
     let goodsData=this.data.goodsList;
     for(let index in list){
       if(item.id===list[index].id){
-        list[index].number--;
-        if(list[index].number===0){
-          list.splice(index,1);
-        }
-        // 空元素弹出
-        // for(let i in goodsData){
-        //   for(let j in goodsData[i]){
-        //     if(item.id===goodsData[i][j].id){
-        //       console.log(goodsData[i][j].number);
-        //       goodsData[i][j].number--;
-        //       console.log(goodsData[i][j].number);
-              
-        //     }
-        //   }
-        // }
-        break;
+        list[index].number+=num;
+          if(list[index].number===0){
+            list.splice(index,1);
+          }
+          break;       
       }
     }
     this.setData({
-      totalNumber:this.data.totalNumber-1,
-      totalPrice:this.data.totalPrice-item.price,
-      shoppingCart:list,
-      goodsList:goodsData,
-      showCartDetail:list.length===0?false:true,
-    })
-    
-  },
-  // 购物车内实现数量增加
-  addInCart: function (e) {
-    let item = e.currentTarget.dataset.item;
-    let list=this.data.shoppingCart;
-    let goodsData=this.data.goodsList;
-    for(let index in list){
-      if(item.id===list[index].id){
-        list[index].number++;
-        // 空元素弹出
-        // for(let i in goodsData){
-        //   for(let j in goodsData[i]){
-        //     if(item.id===goodsData[i][j].id){
-        //       console.log(goodsData[i][j].number);
-        //       goodsData[i][j].number++;
-        //       console.log(goodsData[i][j].number);
-              
-        //     }
-        //   }
-        // }
-        break;
-      }
-    }
-    this.setData({
-      totalNumber:this.data.totalNumber+1,
-      totalPrice:this.data.totalPrice+item.price,
+      totalNumber:this.data.totalNumber+num,
+      totalPrice:this.data.totalPrice+num*item.price,
       shoppingCart:list,
       goodsList:goodsData,
       showCartDetail:list.length===0?false:true,

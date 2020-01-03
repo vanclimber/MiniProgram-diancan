@@ -26,6 +26,11 @@ Page({
 
       }
     })
+    if(JSON.stringify(options)!='{}'){
+      wx.navigateTo({
+        url: '../orderInfo/orderInfo?id='+options.id,
+      })
+    }
 
   },
 

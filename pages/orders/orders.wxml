@@ -7,7 +7,7 @@
     </view>
     <view class="orderDetails">
       <view class="imageContainer">
-        <image src="../../resources/image/orders/store.png" mode="widthFix"></image>
+        <image src="{{item.imageURL}}" mode="widthFix"></image>
       </view>
       <view class="orderInfo">
         <view class="orderTime">下单时间：{{item.time}}</view>

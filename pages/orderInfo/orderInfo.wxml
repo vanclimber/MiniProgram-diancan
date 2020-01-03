@@ -4,7 +4,7 @@
     <view class="title">{{storeName}} ></view>
     <view class="item" wx:for="{{goodsList}}" wx:key="id">
       <view class="imageBox">
-      <image src="../../resources/image/orders/store.png" mode="widthFix"></image>
+      <image src="{{item.imageURL}}" mode="widthFix"></image>
       </view>
       <view class="goodsInfo">
         <span>{{item.name}}</span>

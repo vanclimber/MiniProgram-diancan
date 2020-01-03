@@ -10,16 +10,12 @@ Page({
     storeName:"建设路店",
     description:"这个味道不错",//订单备注
     status:"已支付",     //订单状态
-    orderTime:new Date().toDateString,  //下单时间
+    orderTime:"",  //下单时间
     repastStyle:"堂食",//就餐方式
-    repastTime:new Date().toDateString, //用餐时间
+    repastTime:"", //用餐时间
     payStyle:"微信支付",   //支付方式
     totalPrice:-1,
     totalNumber:-1,
-
-
-
-
 
   },
 
@@ -28,15 +24,19 @@ Page({
    */
   onLoad: function (options) {
     let self=this;
-
     wx.request({
       url:'http://rap2api.taobao.org/app/mock/237196/orderdetail',
       data:{
-        id:options.id
+        ID:options.id
       },
       method:'GET',
       success:function(res){
         let item=res.data;
+        let price=0;
+        let list=item.goodsList;
+        for(let i in list){
+          price+=list[i].price*list[i].num;
+        }
           self.setData({
             goodsList:item.goodsList,
             orderId:item.orderID,
@@ -44,7 +44,8 @@ Page({
             orderTime:item.orderTime,
             status:item.status,
             repastTime:item.repastTime,
-            repastStyle:item.repastStyle
+            repastStyle:item.repastStyle,
+            totalPrice:price
           })   
       },
       fail:function(res){
@@ -52,6 +53,7 @@ Page({
       }
 
     });
+
 
   },
   

@@ -41,6 +41,7 @@
 }
 .goodsInfo > span{
   display: block;
+  text-overflow: ellipsis;
 }
 .goodsInfo span:nth-child(2),.goodsInfo span:nth-child(3){
   color: gray;

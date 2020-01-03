@@ -33,6 +33,7 @@
     <view class="order-content">
       <view class="order-item" wx:for="{{goodsList}}" wx:key="id">
         <view class="item-name">{{item.name}}</view>
+        <view class="item-taste">{{item.tasteSelected}}</view>
         <view class="item-number">x{{item.number}}</view>
         <view class="item-price">￥{{item.number*item.price}}</view>
       </view>

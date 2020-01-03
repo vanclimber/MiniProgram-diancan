@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    goodsList: {},
+    goodsList: [],
     repastStyle:"堂食",
     repastTime:"立即用餐",
     timeList:[],
@@ -31,8 +31,6 @@ Page({
     this.setData({
       repastStyle: e.detail.value
     })
-      // neworder数据不需要渲染,因此不需要setdata
-    this.data.newOrder.repastStyle=this.data.repastStyle;
   },
   //选择就餐时间
   choiceRepastTime:function(e){
@@ -90,8 +88,15 @@ Page({
   },
   toPay:function(e){
     let order={};
-    order.goodsList=this.data.goodsList;
+    // 标准化订单，剔除无用数据
+    let list=this.data.goodsList;
+    let standList=[];
+    for(let i in list){
+      standList.push({ID:list[i].id,num:list[i].number,taste:list[i].tasteSelected});
+    }
+    order.goodsList=standList;
     order.description=this.data.description;
+    order.totalPrice=this.data.totalPrice;
     order.style=this.data.repastStyle;
     order.time=this.data.repastTime;
     wx.request({
@@ -111,21 +116,20 @@ Page({
           duration: 2000
         })
         wx.reLaunch({
-          url: '../orders/orders?id='+"res.data.id"
+          url: '../orders/orders?id='+res.data
         })
-        console.log(res);
       },
       fail: function(res) {
-        console.log
         wx.showToast({
           title:'支付失败',
           icon:'fail',
           duration: 2000
         })
       },
-      complete: function(res) {
-        
-
+      complete: function() {
+        wx.removeStorage({key:'shoppingCart'});
+        wx.removeStorage({key:'totalPrice'});
+        wx.removeStorage({key:'totalNumber'});
       },
     })
 

@@ -1,28 +1,28 @@
 <view class="main-container">
   <!-- 左侧菜单 -->
   <scroll-view scroll-with-animation='true' scroll-y class="left-menu" scroll-into-view="{{menuView}}">
-    <view  wx:for="{{goodsList}}" wx:key="this" data-name="{{index}}" id="menu{{item[0].id}}" class="menu-list {{index==menuName?'menu-list-selected':''}}" bindtap="selectMenu">
-        {{index}}
+    <view  wx:for="{{typeList}}" wx:key="this" data-index="{{index}}" id="menu{{index}}" class="menu-list {{index==menuIndex?'menu-list-selected':''}}" bindtap="selectMenu">
+        {{item}}
     </view> 
   </scroll-view>
   <!-- 右侧商品 -->
   <scroll-view scroll-y class="right-content" bindscroll="scrollContent" scroll-with-animation='true' scroll-into-view="{{contentView}}" >
-    <view class="content-list" wx:for="{{goodsList}}" wx:key="this"  id="title{{item[0].id}}">
+    <view class="content-list" wx:for="{{goodsList}}" wx:key="id"  id="title{{item.id}}">
     <!-- 商品类别 -->
-      <view class="item-title"  >{{index}}</view>
+      <view class="item-title" wx:if="{{goodsList[index-1].foodType!=item.foodType}}" >{{item.foodType}}</view>
       <!-- 具体的商品 -->
-      <view class="item-list" wx:for="{{item}}" wx:key="id">
+      <view class="item-list">
         <view class="item-image-box">
-        <image  mode="widthFix" class="item-image" src="{{item.image}}"></image>
+        <image  mode="widthFix" class="item-image" src="{{item.imageURL}}"></image>
         </view>
         <view class="item-detail">
           <view class="item-name">{{item.name}}</view>
           <view class="item-price">￥ {{item.price}}</view>
-          <icon class="iconfont  {{item.isStar?\"icon-starSelected\":\"icon-star\"}} collect" bindtap="starGoods" data-item="{{item}}"></icon>
+          <icon class="iconfont  {{item.isStar?'icon-starSelected':'icon-star'}} collect" bindtap="starGoods" data-item="{{item}}"></icon>
           <view class="counts-control">
-            <icon class="iconfont icon-subtract count-icon" wx:if="{{item.number}}" bindtap="subtractGoods" data-item="{{item}}"></icon>
-            <span wx:if="{{item.number}}">{{item.number}}</span>
-            <icon class="iconfont icon-add  count-icon" bindtap="addGoods" data-item="{{item}}"></icon>
+            <icon class="iconfont icon-subtract count-icon" wx:if="{{item.number>0}}" bindtap="controlGoodsNum" data-item="{{item}}" data-num="{{-1}}"></icon>
+            <span wx:if="{{item.number>0}}">{{item.number}}</span>
+            <icon class="iconfont icon-add  count-icon" bindtap="controlGoodsNum" data-item="{{item}}" data-num="{{1}}" ></icon>
           </view>
         </view>
       </view>
@@ -52,10 +52,11 @@
         <view class="cart-item" wx:for="{{shoppingCart}}" wx:key="id">
           <view>{{item.name}}</view>
           <view class="amount-control">
+            <view>{{item.tasteSelected}}</view>
             <view class="amount-price">￥{{item.price*item.number}} </view>
-            <icon class="iconfont icon-subtract count-icon" bindtap="subtractInCart" data-item="{{item}}"></icon>
+            <icon class="iconfont icon-subtract count-icon" bindtap="goodsNumInCart" data-item="{{item}}" data-num="{{-1}}" ></icon>
             <view class="content-num">{{item.number}}</view>
-            <icon class="iconfont icon-add count-icon" bindtap="addInCart" data-item="{{item}}"></icon>
+            <icon class="iconfont icon-add count-icon" bindtap="goodsNumInCart" data-item="{{item}}" data-num="{{1}}"></icon>
           </view>
         </view>
       </scroll-view>

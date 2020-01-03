@@ -94,7 +94,6 @@
   padding: 0rpx 10rpx;
   font-size: 40rpx;
   color: #ff8a06;
-
 }
 .footer{
   position: fixed;
