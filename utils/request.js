@@ -1,3 +1,12 @@
+const config = {
+  mock: {
+    domain: 'http://rap2api.taobao.org/app/mock/237196'
+  }
+}
+
+const domain = config.mock.domain; // 懒得模拟运行环境，domain直接配置在这儿
+
+
 const app = getApp();
 /*
 url: 请求地址，必填；
@@ -17,7 +26,7 @@ const $request = (url,data = {},params = {}, ignoreError = true) => {
       mask: true
     });
     wx.request({
-      url,
+      url: domain + url,
       data,
       method: 'POST',
       ...params,
@@ -28,22 +37,15 @@ const $request = (url,data = {},params = {}, ignoreError = true) => {
         //   app.globalData["X-Access-Token"] = res.header["X-Access-Token"]
         // }
         // code码为200，说明请求正常返回。
-        if (res.statusCode === 200) {
-          // 后端封装的业务码，为零一切正常，否则message将会携带错误信息。
-          if (res.data.code === 0) {
-            resolve(res.data.data);
-          } else {
-            wx.showToast({
-              title: res.data.message,
-              icon: 'none'
-            });
-            reject(res.data.data);
-          }
+        if (res.statusCode === 200 && res.data.code === 0) {
+          resolve(res.data.data);
         } else {
           wx.showToast({
-            title: JSON.stringify(res.data),
+            title: res.data.message || '--',
+            mask:true,
             icon: 'none'
-          })
+          });
+          reject(res.data);
         }
       },
       fail: (err) => {
@@ -63,3 +65,7 @@ const $request = (url,data = {},params = {}, ignoreError = true) => {
 
   return ignoreError ? promise.catch(()=>{}) : promise;
 };
+
+module.exports = {
+  $request:$request
+}

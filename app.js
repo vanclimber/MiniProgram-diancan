@@ -1,5 +1,8 @@
 //app.js
+import { $request } from './utils/request';
+
 App({
+  $request,
   onLaunch: function () {
     let self=this
     // 展示本地存储能力

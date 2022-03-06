@@ -1,4 +1,6 @@
 // pages/orders/orders.js
+
+const app = getApp();
 Page({
 
   /**
@@ -16,17 +18,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let self=this;
-    wx.request({
-      url: 'http://rap2api.taobao.org/app/mock/237196/orderlist',
-      success(res){
-        self.setData({
-          storesList:res.data.allorders
-        })
-
-      }
+    let self = this;
+    app.$request('/orderlist')
+      .then((res) => {
+        this.setData({ storesList: res || [] });
     })
-    if(JSON.stringify(options)!='{}'){
+    if(options.id){
       wx.navigateTo({
         url: '../orderInfo/orderInfo?id='+options.id,
       })

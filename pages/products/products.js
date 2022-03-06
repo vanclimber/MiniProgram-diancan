@@ -1,4 +1,6 @@
 // pages/products/products.js
+
+const app = getApp();
 Page({
 
   /**
@@ -19,45 +21,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const self=this;
-    wx.showLoading({
-      title: '正在努力加载中',
-    })
     // 在easy-mock中伪造数据
-    // eaay-mock老是炸，所以我在rap2伪造数据。
-    wx.request({
-      url: 'http://rap2api.taobao.org/app/mock/237196/products',
-      method: 'GET',
-      success: function (res) {
-        wx.hideLoading();
+    // easy-mock老是炸，所以我在rap2伪造数据。
+    const self = this;
+    app.$request('/products')
+      .then((res) => {
+        console.log(res);
         let goodsList=[];
         let typeList=[];
-        // 将收到的object类型数据的整理成数组
-        for(let i in res.data){
-          typeList.push(i);
-          for(let j in res.data[i]){
-            goodsList.push(res.data[i][j]);
-            goodsList[goodsList.length-1].number=0;
-            goodsList[goodsList.length-1].isStar=false;
-            goodsList[goodsList.length-1].tasteSelected=goodsList[goodsList.length-1].tastes[0];
+        for(let i in res){
+          typeList.push(res[i].type);
+          for(let j in res[i].list){
+            goodsList.push({
+              ...res[i]['list'][j],
+              foodType: res[i].type,
+              number: 0,
+              isStar: false,
+              tasteSelected: res[i]['list'][j].tastes[0]
+            })
           }
         }
         self.setData({
           goodsList: goodsList,
           typeList:typeList,
         })
-        },
-
-      fail: function () {
-        wx.hideLoading();
-        wx.showToast({
-          title: '哎呀，加载失败了',
-          icon:'none',
-          duration:1000
-        })
-
-      }
-      
+        
     })
     // rpx和px进行转换
     wx.getSystemInfo({
